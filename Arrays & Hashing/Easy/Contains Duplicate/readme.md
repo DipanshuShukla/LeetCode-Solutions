@@ -15,9 +15,11 @@ The approach linearly traverses over the array and for each iteration linearly s
 ```python
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
+
         for i in range(len(nums)):
             for j in range(i+1,len(nums)):
                 if nums[i]==nums[j]: return True
+
         return False
 ```
 
@@ -35,9 +37,12 @@ This approach sorts the array and then linearly traverses the new sorted array t
 ```python
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
+
         nums.sort()
+
         for i in range(len(nums)-1):
             if nums[i]==nums[i+1]: return True
+
         return False
 ```
 
@@ -55,10 +60,13 @@ This approach uses a HashMap data structure to keep track of visited elements an
 ```python
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
+
         map = {}
+
         for i in range(len(nums)):
             if nums[i] in map: return True
             map[nums[i]]=i
+            
         return False
 ```
 
