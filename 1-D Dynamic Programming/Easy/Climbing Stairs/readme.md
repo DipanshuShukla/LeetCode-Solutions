@@ -53,3 +53,28 @@ class Solution:
 - **Time Complexity:** O(n)
 - **Space Complexity:** O(n)
 
+### Solution 3: Tabulation without using extra space
+
+#### Implementation
+
+This approach is similar to the previous solution but, instead of an array, it uses two variables to store the number of ways to climb previous two stairs.
+
+```python
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        if n < 3: return n
+
+        s1, s2 = 1, 2
+
+        for i in range(3,n+1):
+            cur = s2 + s1
+            s1,s2 = s2,cur
+        
+        return s2
+```
+
+#### Complexity Analysis
+
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(1)
+
