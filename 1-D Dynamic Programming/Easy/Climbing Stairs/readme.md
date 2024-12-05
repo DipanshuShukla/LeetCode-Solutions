@@ -78,3 +78,23 @@ class Solution:
 - **Time Complexity:** O(n)
 - **Space Complexity:** O(1)
 
+### Solution 4: Simplified Binet's Formula
+
+#### Implementation
+
+This approach uses a simplified form of Binet's formula to calculate the nth Fibonacci number in constant space and constant time. Since the climbStairs problem can be mapped to finding the nth Fibonacci number, this formula applies.
+
+```python
+import math
+
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        sqrt5 = math.sqrt(5)
+        fib_n = math.pow((1 + sqrt5) / 2, n + 1) / sqrt5
+        return round(fib_n)
+```
+
+#### Complexity Analysis
+
+- **Time Complexity:** O(1)
+- **Space Complexity:** O(1)
