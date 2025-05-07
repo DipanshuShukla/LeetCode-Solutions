@@ -12,6 +12,8 @@
 
 The approach linearly traverses over the array and for each iteration linearly searches for a duplicate in the remaining array.
 
+### Python
+
 ```python
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
@@ -21,6 +23,19 @@ class Solution:
                 if nums[i]==nums[j]: return True
 
         return False
+```
+
+### Java
+
+```java
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        for (int i = 0; i<nums.length; i++)
+            for (int j = i+1; j<nums.length; j++)
+                if (nums[i] == nums[j]) return true;
+        return false;
+    }
+}
 ```
 
 #### Complexity Analysis
@@ -34,6 +49,8 @@ class Solution:
 
 This approach sorts the array and then linearly traverses the new sorted array to compare the adjacent elements for duplicates.
 
+### Python
+
 ```python
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
@@ -44,6 +61,19 @@ class Solution:
             if nums[i]==nums[i+1]: return True
 
         return False
+```
+
+### Java
+
+```java
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        Arrays.sort(nums);
+        for(int i = 0; i < nums.length-1; i++)
+            if (nums[i] == nums[i+1]) return true;
+        return false;
+    }
+}
 ```
 
 #### Complexity Analysis
@@ -57,6 +87,8 @@ class Solution:
 
 This approach uses a HashMap data structure to keep track of visited elements and checks for duplicates every iteration of traversal.
 
+### Python
+
 ```python
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
@@ -68,6 +100,22 @@ class Solution:
             map[nums[i]]=i
             
         return False
+```
+
+### Java
+
+```java
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        HashMap map = new HashMap<Integer,Integer>();
+        for (int i =0; i<nums.length; i++){
+            if(map.containsKey(nums[i])) return true;
+            map.put(nums[i], i);
+        }
+
+        return false;
+    }
+}
 ```
 
 #### Complexity Analysis
