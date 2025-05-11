@@ -10,6 +10,46 @@
 
 #### Implementation
 
+For each character in s, try to find an unvisited matching character in t.
+If all characters from s can be matched uniquely in t, they are anagrams.
+
+### Java
+
+```java
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if (s.length() != t.length()) return false;
+
+        boolean[] visited = new boolean[s.length()];
+
+        for (char c : s.toCharArray()){
+            boolean found = false;
+            for (int i = 0; i < t.length(); i++){
+                if (t.charAt(i) == c && !visited[i]){
+                    visited[i] = true;
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) return false;
+        }
+
+        return true;
+    }
+}
+```
+
+#### Complexity Analysis
+
+- **Time Complexity:** O(n^2)
+- **Space Complexity:** O(n)
+
+
+### Solution 2: [Sorting the Strings]
+
+#### Implementation
+
 The approach sorts both the strings and then traverses both of them at the same time ensuring each character matches in both the stings
 
 ### Python
@@ -46,7 +86,7 @@ class Solution {
 - **Time Complexity:** O(n log n)
 - **Space Complexity:** O(1) (excluding sort space)
 
-### Solution 2: [Using a HashMap]
+### Solution 3: [Using a HashMap]
 
 #### Implementation
 
@@ -97,7 +137,7 @@ class Solution {
 - **Space Complexity:** O(n)
 
 
-### Solution 3: [Using a 26 length array (for lowercase letters only)]
+### Solution 4: [Using a 26 length array (for lowercase letters only)]
 
 #### Implementation
 
