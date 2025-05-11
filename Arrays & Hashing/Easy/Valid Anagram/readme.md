@@ -44,13 +44,14 @@ class Solution {
 #### Complexity Analysis
 
 - **Time Complexity:** O(n log n)
-- **Space Complexity:** O(1)
+- **Space Complexity:** O(1) (excluding sort space)
 
 ### Solution 2: [Using a HashMap]
 
 #### Implementation
 
-This approach uses two HashMaps data structure to track and count each character in each of the strings and then compares them in the end.
+This approach uses two HashMaps data structure to track and count each character in each of the strings and then compares them in the end in python implementation.
+In Java implementation we just populate a map using the first string with characters s as keys and their frequencies as values and then depopulate the map similarly keeping check that the count does not fall below 1. 
 
 ### Python
 
@@ -77,11 +78,12 @@ class Solution {
 
         HashMap<Character, Integer> map = new HashMap<>();
 
-        for (int i = 0; i < s.length(); i++) map.put(s.charAt(i), map.getOrDefault(s.charAt(i), 0)+1);
+        for (char c : s.toCharArray()) map.put(c, map.getOrDefault(c,0) + 1);
 
-        for (int i = 0; i < t.length(); i++){
-            if (!map.containsKey(t.charAt(i)) || map.get(t.charAt(i)) <1) return false;
-            map.put(t.charAt(i), map.get(t.charAt(i))-1);
+        for (char c : t.toCharArray()){
+            if (!map.containsKey(c) || map.get(c)<1) return false;
+
+            map.put(c, map.get(c) - 1);
         }
 
         return true;
@@ -93,3 +95,37 @@ class Solution {
 
 - **Time Complexity:** O(n)
 - **Space Complexity:** O(n)
+
+
+### Solution 3: [Using a 26 length array (for lowercase letters only)]
+
+#### Implementation
+
+Use a 26-length int array to track character frequencies.
+
+### Java
+
+```java
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if (s.length() != t.length()) return false;
+
+        int[] chars = new int[26];
+
+        for (char c : s.toCharArray()) chars[c - 'a'] += 1;
+
+        for (char c : t.toCharArray()){
+            if (chars[c - 'a'] < 1) return false;
+            
+            chars[c - 'a'] -= 1; 
+        }
+
+        return true;
+    }
+}
+```
+
+#### Complexity Analysis
+
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(1)
