@@ -6,11 +6,48 @@
 
 ## Solutions
 
-### Solution 1: [Left-Right Pointer]
+### Solution 1: [bruteforce approach]
+
+#### Implementation
+
+This approach first creates a new string by lowercasing the characters and filtering all special characters from the orignal string. After filtering it we compare from the natural string reverse.
+
+### Python
+
+```python
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        newS = ''.join(c.lower() for c in s if c.isalnum())
+        return newS == newS[::-1]
+
+```
+
+### Java
+
+```java
+class Solution {
+    public boolean isPalindrome(String s) {
+
+        s = s.toLowerCase().replaceAll("[^A-Za-z0-9]", "");
+
+        return s.equals(new StringBuilder(s).reverse().toString());
+    }
+}
+```
+
+#### Complexity Analysis
+
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(n)
+
+
+### Solution 2: [Left-Right Pointer]
 
 #### Implementation
 
 The approach uses two pointers (one left, one right) to check for palindrome from both sides while ignoring special characters.
+
+### Python
 
 ```python
 class Solution:
@@ -30,31 +67,33 @@ class Solution:
         return True
 ```
 
-#### Complexity Analysis
+### Java
 
-- **Time Complexity:** O(n)
-- **Space Complexity:** O(1)
+```java
+class Solution {
+    public boolean isPalindrome(String s) {
 
-### Solution 2: [Creating new filtered string and then using Left-Right Pointer]
+        s = s.toLowerCase();
 
-#### Implementation
+        int i = 0, j = s.length() - 1;
+        
+        while(i<j){
+            while (!Character.isLetterOrDigit(s.charAt(i)) && i<j) i++;
+            while (!Character.isLetterOrDigit(s.charAt(j)) && i<j) j--;
 
-This approach first creates a new string by filtering all special characters from the orignal string. After filtering it uses the same two pointer technique as the previous solution.
+            if (s.charAt(i) != s.charAt(j)) return false;
 
-```python
-class Solution:
-    def isPalindrome(self, s: str) -> bool:
+            i++;
+            j--;
+        }
 
-        newS = ''
-        l,r = 0, len(newS)-1
+        return true;
+    }
+}
 
-        for c in s:
-            if c.isalpha() or c.isdigit(): newS += c.lower()
-
-        return newS == newS[::-1]
 ```
 
 #### Complexity Analysis
 
 - **Time Complexity:** O(n)
-- **Space Complexity:** O(n)
+- **Space Complexity:** O(1)

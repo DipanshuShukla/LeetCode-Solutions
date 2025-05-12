@@ -31,11 +31,13 @@ class Solution:
 - **Time Complexity:** O(n^2)
 - **Space Complexity:** O(1)
 
-### Solution 2: [Left-Right Pointer]
+### Solution 2: [Left-Right window Pointer]
 
 #### Implementation
 
 The approach uses two pointers one left to keep track of the lowest price encountered, one right to traverse the list and keep updating the max-profit.
+
+### Python
 
 ```python
 class Solution:
@@ -49,6 +51,24 @@ class Solution:
             else: maxP = max(maxP, current-lowest)
 
         return maxP
+```
+
+### Java
+
+```java
+class Solution {
+    public int maxProfit(int[] prices) {
+        int i = 0, j = i+1, maxProfit = 0 ;
+        while(i < prices.length && j < prices.length){
+            int curProfit = prices[j] - prices[i];
+            maxProfit  = Math.max(maxProfit, curProfit);
+            if (curProfit < 0) i = j;
+
+            j++;
+        }
+        return maxProfit;
+    }
+}
 ```
 
 #### Complexity Analysis
