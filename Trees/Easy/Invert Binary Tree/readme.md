@@ -6,7 +6,7 @@ https://leetcode.com/problems/invert-binary-tree/
 
 ## Solutions
 
-### Solution 1: Using a queue
+### Solution 1: Using a queue [Level order Traversal]
 
 #### Implementation
 
