@@ -12,6 +12,8 @@
 
 The approach uses nested loops to traverse the array and, for each iteration, calculates the profit for all possible sell days after the current buy day to find the maximum profit.
 
+### Python
+
 ```python
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
@@ -24,6 +26,22 @@ class Solution:
 
         return maxProfit
 
+```
+
+### Java
+
+```java
+class Solution {
+    public int maxProfit(int[] prices) {
+        int maxProfit = 0 ;
+        for( int i = 0 ; i < prices.length; i++){
+            for (int j = i + 1; j < prices.length; j++){
+                maxProfit = Math.max(maxProfit, prices[j] - prices[i]);
+            }
+        }
+        return maxProfit;
+    }
+}
 ```
 
 #### Complexity Analysis
