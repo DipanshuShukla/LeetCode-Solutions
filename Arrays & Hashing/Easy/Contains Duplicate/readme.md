@@ -122,3 +122,29 @@ class Solution {
 
 - **Time Complexity:** O(n)
 - **Space Complexity:** O(n)
+
+### Solution 3: [Using a HashSet]
+
+#### Implementation
+
+This approach is exactly as the hashmap approach but uses hashset.
+
+### Java
+
+```java
+class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        HashSet<Integer> seen = new HashSet<Integer>();
+        for (int num: nums) {
+            if (seen.contains(num)) return true;
+            seen.add(num);
+        }
+        return false;
+    }
+}
+```
+
+#### Complexity Analysis
+
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(n)
