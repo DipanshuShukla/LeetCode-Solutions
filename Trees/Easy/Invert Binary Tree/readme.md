@@ -46,6 +46,8 @@ class Solution:
 
 The approach uses recursion. If the current node is not null, it will swap the left and right pointer while calling funciton itself to reverse further.
 
+### Python
+
 ```python
 # Definition for a binary tree node.
 # class TreeNode:
@@ -58,6 +60,37 @@ class Solution:
                 
         if root: root.left, root.right = self.invertTree(root.right), self.invertTree(root.left)
         return root
+```
+
+### Java
+
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode invertTree(TreeNode root) {
+        if (root != null){
+            TreeNode temp = this.invertTree(root.left);
+            root.left = this.invertTree(root.right);
+            root.right = temp;
+        }
+
+        return root;
+    }
+}
 ```
 
 #### Complexity Analysis
