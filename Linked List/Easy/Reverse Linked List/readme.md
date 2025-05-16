@@ -12,6 +12,8 @@
 
 The approach uses recursion to first traverse to the end of the list to find the Head of the new Linked List and save it in a variable to return later. Now, the list is reversed before returning.
 
+### Python
+
 ```python
 # Definition for singly-linked list.
 # class ListNode:
@@ -30,6 +32,34 @@ class Solution:
         return res
 ```
 
+### Java
+
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseList(ListNode head) {
+
+        if (head == null || head.next == null) return head;
+
+        ListNode res = reverseList(head.next);
+        
+        head.next.next =  head;
+        head.next = null;
+
+        return res;   
+    }
+}
+```
+
 #### Complexity Analysis
 
 - **Time Complexity:** O(n)
@@ -41,6 +71,8 @@ class Solution:
 #### Implementation
 
 The approach uses a while loop to traverse the linked list linearly to the end. For each iteration of the while loop, we save the next node to a temp variable, update the current node to point to the previous node, update the previous node to the current node, update the current node to the node saved in the temp vaiable and continue the loop. when the loop exits, we return whatever is stored in the previous node.
+
+### Python
 
 ```python
 # Definition for singly-linked list.
@@ -60,6 +92,36 @@ class Solution:
             cur = temp
         
         return prev
+```
+
+### Java
+
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseList(ListNode head) {
+
+        ListNode cur = head, prev = null;
+        
+        while(cur != null){
+            ListNode temp = cur.next;
+            cur.next = prev;
+            prev = cur;
+            cur = temp;
+        }
+        return prev;
+    }
+}
+
 ```
 
 #### Complexity Analysis
