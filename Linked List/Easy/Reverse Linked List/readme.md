@@ -63,10 +63,62 @@ class Solution {
 #### Complexity Analysis
 
 - **Time Complexity:** O(n)
-- **Space Complexity:** O(1)
+- **Space Complexity:** O(n)
+
+### Solution 2: [Using Recursion with refrence variable]
+
+#### Implementation
+
+This approach is the same as the recursive approach but uses a refrence variable to pass in the recurison funciton that decreases the space complexity.
+
+### Java
+
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+
+    class ResultWrapper{
+        ListNode result;
+    }
+
+    public void reverseList(ListNode head, ResultWrapper resultWrapper) {
+        if (head == null || head.next == null) {
+            resultWrapper.result = head;
+            return;
+        }
+        reverseList(head.next, resultWrapper);
+        head.next.next =  head;
+        head.next = null;
+    }
+
+    public ListNode reverseList(ListNode head) {
+
+        ResultWrapper resultWrapper = new ResultWrapper();
+
+        reverseList(head, resultWrapper);
+
+        return resultWrapper.result;
+        
+    }
+}
+```
+
+#### Complexity Analysis
+
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(n) not truly O(1) space due to call stack
 
 
-### Solution 2: [Using While-Loop]
+### Solution 3: [Using While-Loop]
 
 #### Implementation
 
@@ -128,3 +180,52 @@ class Solution {
 
 - **Time Complexity:** O(n)
 - **Space Complexity:** O(1)
+
+### Solution 4: [Using Stack]
+
+#### Implementation
+
+This approach uses a stack to so the same we did with the recursion call stack.
+
+### Java
+
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if (head == null || head.next == null) return head;
+
+        Stack<ListNode> stack = new Stack<>();
+
+        while(head !=null){
+            stack.push(head);
+            head = head.next;
+        }
+
+        head = stack.pop();
+        head.next = null;
+
+        while(!stack.isEmpty()){
+            ListNode cur = stack.pop();
+            cur.next.next = cur;
+            cur.next = null;
+        }
+
+        return head;
+    }
+}
+```
+
+#### Complexity Analysis
+
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(n)
