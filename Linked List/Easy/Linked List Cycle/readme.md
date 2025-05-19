@@ -12,6 +12,8 @@
 
 The approach uses a HashMap to keep track of visited nodes while traversing the linked list linearly. If the current node is already present in the HashMap, it is clear we have detected a cycle. If the end of linked list is reached, we return False.
 
+### Python
+
 ```python
 # Definition for singly-linked list.
 # class ListNode:
@@ -32,6 +34,37 @@ class Solution:
         return False
 ```
 
+### Java
+
+```java
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        
+        HashSet<ListNode> set = new HashSet<>();
+
+        while(head!=null){
+            if (set.contains(head)) return true;
+            set.add(head);
+            head = head.next;
+        }
+
+        return false;
+
+    }
+}
+```
+
 #### Complexity Analysis
 
 - **Time Complexity:** O(n)
@@ -43,6 +76,8 @@ class Solution:
 #### Implementation
 
 The approach uses a fast and a slow pointer to traverse the list. The slow pointer traveses one node at a time and fast pointer traverses twise the speed of slow pointer. If the pointers meet we have detected a cycle. On the other hand, if the fast pointer reaches the end of the list it signifies that there are no cycles.
+
+### Python
 
 ```python
 # Definition for singly-linked list.
@@ -63,6 +98,36 @@ class Solution:
         return False
 ```
 
+### Java
+
+```java
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        
+        ListNode slow = head, fast = head;
+
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if (fast == slow) return true;
+        }
+
+        return false;
+    }
+}
+```
+
 #### Complexity Analysis
 
 - **Time Complexity:** O(n)
@@ -73,6 +138,8 @@ class Solution:
 #### Implementation
 
 The approach modifies the value of the visited nodes to detect them later as visited.
+
+### Python
 
 ```python
 # Definition for singly-linked list.
@@ -90,6 +157,34 @@ class Solution:
             head = head.next
 
         return False
+```
+
+### Java
+
+```java
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        
+        while(head != null){
+            if (head.val == Integer.MAX_VALUE) return true;
+            head.val = Integer.MAX_VALUE;
+            head = head.next;
+        }
+
+        return false;
+    }
+}
 ```
 
 #### Complexity Analysis

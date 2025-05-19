@@ -123,7 +123,7 @@ class Solution {
 - **Time Complexity:** O(n)
 - **Space Complexity:** O(n)
 
-### Solution 3: [Using a HashSet]
+### Solution 4: [Using a HashSet]
 
 #### Implementation
 
