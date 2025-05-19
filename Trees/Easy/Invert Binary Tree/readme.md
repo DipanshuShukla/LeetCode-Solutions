@@ -141,4 +141,56 @@ class Solution {
 #### Complexity Analysis
 
 - **Time Complexity:** O(n)
-- **Space Complexity:** O(1)
+- **Space Complexity:** O(h), where h is the height of the tree (because of the call stack)
+
+
+### Solution 3: Using a stack [DFS]
+
+#### Implementation
+
+The method uses an a stack to traverse the tree in DFS fashion.
+
+### Java
+
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null) return null;
+
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        
+        while(!stack.isEmpty()){
+            TreeNode cur = stack.pop();
+            TreeNode temp = cur.left;
+            cur.left = cur.right;
+            cur.right = temp;
+
+            if (cur.right != null) stack.push(cur.right);
+            if (cur.left != null) stack.push(cur.left);
+        }
+
+        return root;
+    }
+}
+```
+
+#### Complexity Analysis
+
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(h), where h is the height of the tree
