@@ -6,7 +6,7 @@ https://leetcode.com/problems/invert-binary-tree/
 
 ## Solutions
 
-### Solution 1: Using a queue [Level order Traversal]
+### Solution 1: Using a queue [Level order Traversal, iterative bfs]
 
 #### Implementation
 
@@ -85,7 +85,7 @@ class Solution {
 - **Time Complexity:** O(n)
 - **Space Complexity:** O(w), w = width of the tree.
 
-### Solution 2: Using a Recursion
+### Solution 2: Using a Recursive DFS
 
 #### Implementation
 
@@ -144,7 +144,7 @@ class Solution {
 - **Space Complexity:** O(h), where h is the height of the tree (because of the call stack)
 
 
-### Solution 3: Using a stack [DFS]
+### Solution 3: Using a stack [Iterative DFS]
 
 #### Implementation
 
@@ -194,3 +194,60 @@ class Solution {
 
 - **Time Complexity:** O(n)
 - **Space Complexity:** O(h), where h is the height of the tree
+
+### Solution 4: Using a stack [Recursive BFS]
+
+#### Implementation
+
+The method uses an a recursion to traverse the tree in BFS fashion.
+
+### Java
+
+```java
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public void invertTree(Queue<TreeNode> level) {
+        if (level.size() == 0) return;
+
+        Queue<TreeNode> next = new LinkedList();
+
+        while(level.size() != 0){
+            TreeNode cur = level.poll();
+            TreeNode temp = cur.left;
+            cur.left = cur.right;
+            cur.right = temp;
+            if (cur.left != null) next.add(cur.left);
+            if (cur.right != null) next.add(cur.right);
+        }
+        invertTree(next);
+    }
+
+    public TreeNode invertTree(TreeNode root) {
+        if(root == null) return root;
+
+        LinkedList<TreeNode> level = new LinkedList();
+        level.add(root);
+        invertTree(level);
+        return root;
+    }
+}
+```
+
+#### Complexity Analysis
+
+- **Time Complexity:** O(n)
+- **Space Complexity:** O(w), w = width of the tree.
