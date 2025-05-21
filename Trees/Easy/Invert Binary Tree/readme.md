@@ -10,7 +10,7 @@ https://leetcode.com/problems/invert-binary-tree/
 
 #### Implementation
 
-The method uses an iterative approach and uses a queue to traverse a tree. We start to traverse a queue containing the root node in the begining. During each iteration, we swap the left and right node of the current node popped from the queue, swap the left and right nodes, and put the left and right nodes back into the queue given they are not null.
+The method uses an iterative approach and uses a queue to traverse a tree. We start to traverse a queue containing the root node in the begining. During each iteration, we swap the left and right node of the current node popped from the queue, and put the left and right nodes back into the queue given they are not null.
 
 ### Python
 
@@ -199,7 +199,7 @@ class Solution {
 
 #### Implementation
 
-The method uses an a recursion to traverse the tree in BFS fashion.
+The method uses an a recursive approach to traverse the tree in BFS fashion. we take the length of the current level at the begining to traverse only the nodes in the current level.
 
 ### Java
 
@@ -221,32 +221,34 @@ The method uses an a recursion to traverse the tree in BFS fashion.
  */
 class Solution {
     public TreeNode invertTree(TreeNode root) {
+        if (root == null) return root;
+
         Queue<TreeNode> q = new LinkedList();
         q.add(root);
+
         invertTree(q);
 
         return root;
     }
 
-        public void invertTree(Queue<TreeNode> q) {
-            if (q.isEmpty()) return;
+    public void invertTree(Queue<TreeNode> q) {
+        if (q.isEmpty()) return;
+        int curLen = q.size();
 
+        for (int i = 0; i < curLen; i++){
             TreeNode cur = q.poll();
-            if (cur == null){
-                invertTree(q);
-                return;
-            }
 
             TreeNode temp = cur.left;
             cur.left = cur.right;
             cur.right = temp;
 
-            q.add(cur.left);
-            q.add(cur.right);
-
-            invertTree(q);
-            
+            if (cur.left != null) q.add(cur.left);
+            if (cur.right !=  null) q.add(cur.right);
         }
+
+        invertTree(q);
+    }
+
 }
 ```
 
