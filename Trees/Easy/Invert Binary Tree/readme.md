@@ -220,30 +220,33 @@ The method uses an a recursion to traverse the tree in BFS fashion.
  * }
  */
 class Solution {
-    public void invertTree(Queue<TreeNode> level) {
-        if (level.size() == 0) return;
+    public TreeNode invertTree(TreeNode root) {
+        Queue<TreeNode> q = new LinkedList();
+        q.add(root);
+        invertTree(q);
 
-        Queue<TreeNode> next = new LinkedList();
+        return root;
+    }
 
-        while(level.size() != 0){
-            TreeNode cur = level.poll();
+        public void invertTree(Queue<TreeNode> q) {
+            if (q.isEmpty()) return;
+
+            TreeNode cur = q.poll();
+            if (cur == null){
+                invertTree(q);
+                return;
+            }
+
             TreeNode temp = cur.left;
             cur.left = cur.right;
             cur.right = temp;
-            if (cur.left != null) next.add(cur.left);
-            if (cur.right != null) next.add(cur.right);
+
+            q.add(cur.left);
+            q.add(cur.right);
+
+            invertTree(q);
+            
         }
-        invertTree(next);
-    }
-
-    public TreeNode invertTree(TreeNode root) {
-        if(root == null) return root;
-
-        LinkedList<TreeNode> level = new LinkedList();
-        level.add(root);
-        invertTree(level);
-        return root;
-    }
 }
 ```
 
