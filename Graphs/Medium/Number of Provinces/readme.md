@@ -46,3 +46,54 @@ class Solution {
 
 - **Time Complexity:** O(n^2)
 - **Space Complexity:** O(n)
+
+
+### Solution 2: [Iterative BFS]
+
+We use a for loop to initialy iterate over all nodes and in case we find a unvisited node, province count is incremented. All the connected nodes of that province are explored and marked visited in a BFS manneer using a queue.
+
+### Java
+
+```java
+class Solution {
+    public int findCircleNum(int[][] isConnected) {
+
+        int n = isConnected.length; // number of nodes
+        int[] visited = new int[n];
+        int count = 0; // number of provinces
+
+        for (int i = 0; i < n; i++){
+            if (visited[i] == 1) continue;
+            count++;
+            bfs(i, isConnected, visited);
+        }
+
+        return count;
+
+    }
+
+    private void bfs(int startNode, int[][] isConnected, int[] visited){
+
+        Queue<Integer> q = new LinkedList<>();
+        q.add(startNode);
+        visited[startNode] = 1;
+
+        while(!q.isEmpty()){
+            int curNode = (int) q.poll();
+            for (int j = 0; j < isConnected.length; j++){
+                if (isConnected[curNode][j] == 1 && visited[j] == 0){
+                    q.add(j);
+                    visited[j] = 1;
+                }
+            }
+        }
+    }
+
+
+}
+```
+
+#### Complexity Analysis
+
+- **Time Complexity:** O(n^2)
+- **Space Complexity:** O(n)
